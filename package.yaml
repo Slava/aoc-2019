@@ -62,3 +62,8 @@ executables:
     source-dirs:         src
     dependencies:
     - aoc
+  day04-2:
+    main:                day04-2.hs
+    source-dirs:         src
+    dependencies:
+    - aoc
