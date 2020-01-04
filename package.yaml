@@ -20,9 +20,11 @@ description:         AOC 2019
 
 dependencies:
 - base >= 4.7 && < 5
+- vector
+- split
 
 library:
-  source-dirs: src
+  source-dirs: lib
 
 executables:
   day01:
@@ -32,6 +34,11 @@ executables:
     - aoc
   day01-2:
     main:                day01-2.hs
+    source-dirs:         src
+    dependencies:
+    - aoc
+  day02:
+    main:                day02.hs
     source-dirs:         src
     dependencies:
     - aoc
