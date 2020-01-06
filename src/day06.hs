@@ -1,11 +1,9 @@
 import Data.List.Split (splitOn)
-import Data.Set (toList, fromList)
-
-uniquify lst = toList $ fromList lst
+import Data.Containers.ListUtils (nubOrd)
 
 checksum :: [(String, String)] -> Int
 checksum orbits =
-  let planets = uniquify $ concatMap (\o -> [fst o, snd o]) orbits
+  let planets = nubOrd $ concatMap (\o -> [fst o, snd o]) orbits
       countOrbits planet =
         let immediateOrbits = [to | (from, to) <- orbits, from == planet]
             subValues = map countOrbits immediateOrbits
