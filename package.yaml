@@ -22,6 +22,7 @@ dependencies:
 - base >= 4.7 && < 5
 - vector
 - split
+- containers
 
 library:
   source-dirs: lib
@@ -74,6 +75,11 @@ executables:
     - aoc
   day05-2:
     main:                day05-2.hs
+    source-dirs:         src
+    dependencies:
+    - aoc
+  day06:
+    main:                day06.hs
     source-dirs:         src
     dependencies:
     - aoc
