@@ -67,3 +67,13 @@ executables:
     source-dirs:         src
     dependencies:
     - aoc
+  day05:
+    main:                day05.hs
+    source-dirs:         src
+    dependencies:
+    - aoc
+  day05-2:
+    main:                day05-2.hs
+    source-dirs:         src
+    dependencies:
+    - aoc
