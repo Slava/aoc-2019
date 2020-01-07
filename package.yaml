@@ -89,3 +89,8 @@ executables:
     source-dirs:         src
     dependencies:
     - aoc
+  day07:
+    main:                day07.hs
+    source-dirs:         src
+    dependencies:
+    - aoc
