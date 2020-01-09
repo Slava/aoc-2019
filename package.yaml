@@ -134,3 +134,8 @@ executables:
     source-dirs:         src
     dependencies:
     - aoc
+  day11-2:
+    main:                day11-2.hs
+    source-dirs:         src
+    dependencies:
+    - aoc
