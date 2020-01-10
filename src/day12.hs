@@ -1,5 +1,4 @@
 import Data.List.Split (splitOn)
-import Debug.Trace (trace)
 
 parsePosition :: String -> [Int]
 parsePosition str = map (read . last . (splitOn "=")) $ splitOn "," $ tail $ init str
