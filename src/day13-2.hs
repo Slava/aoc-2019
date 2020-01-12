@@ -1,5 +1,4 @@
 import Data.IntMap (IntMap, lookup, insert, fromAscList)
-import qualified Data.Map as M
 import Data.List.Extra (chunksOf)
 import Data.List.Split (splitOn)
 import Data.Maybe (fromMaybe)
@@ -109,15 +108,16 @@ fst3 (f, _, _) = f
 
 processMovement :: (Maybe Int, Int, Int) -> [Int] -> (Maybe Int, Int, Int)
 processMovement (_, paddle, ball) (x:_:c:_) =
-  if c == 3 && paddle == -1 then (Nothing, x, ball)
-  else if c == 4 then
-    let ball' = x
-        movement = case ball' `compare` paddle of
-          GT -> -1
-          LT -> 1
-          EQ -> 0
-    in (Just movement, paddle, ball')
-       else (Nothing, paddle, ball)
+  let paddle' = if c == 3 then x else paddle
+      ball' = if c == 4 then x else ball
+  in if paddle' == -1 || ball' == -1 then (Nothing, paddle', ball')
+     else if paddle == -1 || ball == -1 || c == 4 then
+            let movement = case ball' `compare` paddle' of
+                  GT -> 1
+                  LT -> -1
+                  EQ -> 0
+            in (Just movement, paddle', ball')
+          else (Nothing, paddle', ball')
 
 processMovement _ _ = error "invalid triplet in output"
 
@@ -128,7 +128,8 @@ process program =
       paddleOrBall = filter (\(_:_:c:_) -> c `elem` [3, 4]) screenInstructions
       states = scanl processMovement (Nothing, -1,-1) paddleOrBall
       commands = [command | Just command <- map fst3 states]
-      latestScore = maximum $ map (\(_:_:c:_) -> c) $ filter (\(x:_) -> x == -1) $ screenInstructions
+      scores = map (\(_:_:c:_) -> c) $ filter (\(x:_) -> x == -1) screenInstructions
+      latestScore = last scores
   in
     latestScore
 
